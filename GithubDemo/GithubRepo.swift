@@ -18,7 +18,7 @@ class GithubRepo: CustomStringConvertible {
 
     var name: String?
     var ownerHandle: String?
-    var ownerAvatarURL: String?
+    var ownerAvatarURL: NSURL?
     var stars: Int?
     var forks: Int?
     var repoDescription: String?
@@ -42,7 +42,7 @@ class GithubRepo: CustomStringConvertible {
                 self.ownerHandle = ownerHandle
             }
             if let ownerAvatarURL = owner["avatar_url"] as? String {
-                self.ownerAvatarURL = ownerAvatarURL
+                self.ownerAvatarURL = NSURL(string: ownerAvatarURL)
             }
             if let repoDescription = jsonResult["description"] as? String {
                 self.repoDescription = repoDescription
@@ -103,6 +103,6 @@ class GithubRepo: CustomStringConvertible {
             "\n\t[Forks: \(self.forks!)]" +
             "\n\t[Owner: \(self.ownerHandle!)]" +
             "\n\t[Avatar: \(self.ownerAvatarURL!)]" +
-            "\n\t[Description: \(self.repoDescription!)]"
+            "\n\t[Description: \(self.repoDescription)]"
     }
 }
